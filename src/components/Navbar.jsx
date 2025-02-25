@@ -7,7 +7,7 @@ const Navbar = () => {
 
             <div className='flex items-center gap-24'>
 
-                <span className='text-purple-700 font-[950] text-3xl'>
+                <span className='text-[#D64227] cursor-pointer font-[950] text-3xl'>
                     CV maker
                 </span>
 

@@ -13,7 +13,7 @@ const Hero = () => {
             Unlock your career potential with our AI-powered resume builder—a user-friendly platform designed to help you create professional, modern resumes in minutes. Enhance your content with smart suggestions, customize your design with our easy-to-use editor, and export your polished resume as a PDF.
             </p>
 
-            <button className='bg-[#D54027] hover:bg-[#b83721] duration-300 cursor-pointer px-6 py-[13px] text-sm font-medium rounded-full text-white text-lg tracking-wider mt-6 mx-auto flex items-center gap-[2px]'>
+            <button className='bg-[#D54027] hover:bg-[#b83721] duration-300 cursor-pointer px-6 py-[13px]  font-medium rounded-full text-white text-base tracking-wider mt-6 mx-auto flex items-center gap-[2px]'>
                 <span>
                     <IoIosAdd className='text-3xl opacity-70' />
                 </span>
