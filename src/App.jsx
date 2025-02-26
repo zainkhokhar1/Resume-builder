@@ -13,7 +13,7 @@ import First from './templates/First.jsx';
 function App() {
 
   return (
-    <div className='overflow-x-hidden'>
+    <div className=''>
       <Navbar />
       <Router>
         <Routes>
@@ -27,7 +27,7 @@ function App() {
           <Route path='/templates' element={<h1>Templates</h1>} />
 
           {/* just for checking template route */}
-          <Route path='/template/:id' element={<First />} />
+          <Route path='/template/first' element={<First />} />
         </Routes>
       </Router>
     </div>

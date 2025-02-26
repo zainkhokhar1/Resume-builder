@@ -7,7 +7,7 @@ import resume2 from '../assets/resume2.jpeg';
 import resume3 from '../assets/resume3.jpg';
 import resume4 from '../assets/resume4.jpg';
 import resume5 from '../assets/resume5.png';
-import resume6 from '../assets/resume6.jpeg';
+import first from '../assets/resume6.jpeg';
 
 const ShowResume = () => {
 
@@ -27,19 +27,19 @@ const ShowResume = () => {
 
     // array of images of resumes
     const resumes = [
-        resume1,
+        first,
         resume2,
         resume3,
         resume4,
         resume5,
-        resume6,
+        resume1,
         resume1,
         resume4,
         resume5,
         resume2,
         resume3,
         resume1
-    ]
+    ];
 
     return (
         <div className='w-full my-7 px-34'>

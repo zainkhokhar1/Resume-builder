@@ -1,4 +1,9 @@
 import React, { Fragment, useState } from 'react'
+import { RxCross1 } from "react-icons/rx";
+import ChangeColour from './ChangeColour';
+import ChangeFontSize from './ChangeFontSize';
+import ChangeFontBold from './ChangeFontBold';
+
 
 const Toggle = ({ data, setData, className, element }) => {
 
@@ -8,6 +13,7 @@ const Toggle = ({ data, setData, className, element }) => {
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             setShowIn(!showIn);
+            setShowOptions(!showOptions);
         }
     }
 
@@ -16,7 +22,8 @@ const Toggle = ({ data, setData, className, element }) => {
             {
                 showIn ? "" : <Fragment className='relative w-fit'>
                     <input
-                        className={`outline-none ${className}`}
+                        className={`outline-purple-700/10 h-11 p-1 ${data[element]?.fontWeight} ${data[element]?.fontSize} ${className}`}
+                        style={{ color: data[element]?.colour }}
                         value={data[element]?.text}
                         onChange={(e) =>
                             setData(prevData => ({
@@ -33,89 +40,46 @@ const Toggle = ({ data, setData, className, element }) => {
                 </Fragment>
             }
             {
-                showIn ? (
-                    <div className={className} onDoubleClick={() => { setShowIn(!showIn); setShowOptions(!showOptions) }}>
+                showIn && (
+                    <div className={`${className} break-words ${data[element]?.fontWeight} ${data[element]?.fontSize}`} style={{ color: data[element]?.colour }} onDoubleClick={() => { setShowIn(!showIn); setShowOptions(!showOptions) }}>
                         {
                             data[element]?.text
                         }
                     </div>
-                ) :
-                    <div className='fixed w-fit h-fit z-[999] top-24 flex items-center gap-2 left-2/6' onClick={() => setShowOptions(!showOptions)}>
-
-                        <div>
-                            <h2>
-                                Select Colour
-                            </h2>
-
-                            <div className='flex gap-2 items-center'>
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], colour: 'text-black' }
-                                }))} className='cursor-pointer flex w-5 h-5 rounded-full bg-black'></div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], colour: 'text-purple-600' }
-                                }))} className='cursor-pointer flex w-5 h-5 rounded-full bg-purple-600'></div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], colour: 'text-yellow-600' }
-                                }))} className='cursor-pointer flex w-5 h-5 rounded-full bg-yellow-600'></div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], colour: 'text-red-600' }
-                                }))} className='cursor-pointer flex w-5 h-5 rounded-full bg-red-600'></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2>
-                                Select Font Size
-                            </h2>
-                            <div className='flex gap-1'>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-xs' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>Extra Small</div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-sm' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>Small</div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-md' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>Medium</div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-lg' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>Large</div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-xl' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>Extra Large</div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-2xl' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>XL</div>
-
-                                <div onClick={() => setData(prevData => ({
-                                    ...prevData,
-                                    [element]: { ...prevData[element], fontSize: 'text-3xl' }
-                                }))} className='cursor-pointer bg-gray-100 border border-gray-300 py-1 text-sm w-fit px-1 rounded-md'>XXL</div>
-                            </div>
-                        </div>
-
-                    </div>
+                )
             }
-            <div className={`absolute top-0 left-0 w-full h-full ${showIn ? "hidden" : "bg-transparent"} bg-opacity-50 z-[99]`} onClick={() => { setShowOptions(!showOptions); setShowIn(!showIn) }}></div>
+
+            {/* later move this sidebar to separate file */}
+            <div className={`fixed w-44 overflow-y-auto pt-50 space-y-2 bg-black/80 h-screen z-[999] flex flex-col items-center justify-center gap-5 py-5 left-0 top-0 transition-all text-white duration-500 ${showOptions ? '-translate-x-0' : '-translate-x-full z-10'}`} >
+
+                {/* absolute cross to close the options */}
+                <div className='absolute top-4 right-2 p-2 rounded-full bg-black hover:bg-black/80 text-white duration-200 cursor-pointer' onClick={() => {
+                    setShowIn(!showIn);
+                    setShowOptions(!showOptions);
+                }}>
+                    <RxCross1 />
+                </div>
+
+                <div className='flex items-center justify-center w-full'>
+                    <ChangeColour setData={setData} data={data} element={element} />
+                </div>
+
+                <div className='w-full px-3 text-center'>
+                    <h2 className='text-sm font-semibold my-2'>
+                        Select Font Size
+                    </h2>
+                    <ChangeFontSize setData={setData} element={element} />
+                </div>
+
+                <div className='text-center'>
+                    <h2 className='text-sm font-semibold my-2'>
+                        Change Font Boldness
+                    </h2>
+                    <ChangeFontBold setData={setData} element={element} />
+                </div>
+
+            </div>
+
         </>
     )
 }
