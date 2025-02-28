@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import Home from './screens/Home.jsx';
 import First from './templates/First.jsx';
-
+import Signup from './screens/Signup.jsx';
+import UpdateUserDetails from './screens/UpdateUserDetails.jsx';
 
 function App() {
 
@@ -22,12 +23,14 @@ function App() {
           <Route path='/contact' element={<h1>Contact</h1>} />
           <Route path='/create/:id' element={<h1>Create</h1>} />
           <Route path='/myresumes' element={<h1>My Resumes</h1>} />
-          <Route path='/login' element={<h1>Login</h1>} />
-          <Route path='/signup' element={<h1>Register</h1>} />
           <Route path='/templates' element={<h1>Templates</h1>} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/user/update' element={<UpdateUserDetails />} />
+
 
           {/* just for checking template route */}
           <Route path='/template/first' element={<First />} />
+
         </Routes>
       </Router>
     </div>
