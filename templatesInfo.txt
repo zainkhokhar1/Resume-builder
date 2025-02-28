@@ -1,0 +1,32 @@
+
+templateSlice is just for those templates who have the following details only
+
+Name,
+location,
+phone,
+email,
+theme,
+objective text
+personal data including
+1.NickName
+2.Birthday
+3.Age
+4.Civil Status
+5.Permanent Address
+6.Educational Background
+1.name 
+2.degree
+3.college
+4.duration
+
+7.seconday
+1.name 
+2.degree
+3.college
+4.duration
+
+8. primary
+1.name 
+2.degree
+3.college
+4.duration

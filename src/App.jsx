@@ -13,7 +13,7 @@ import First from './templates/First.jsx';
 function App() {
 
   return (
-    <div className=''>
+    <div className='bg-slate-50'>
       <Navbar />
       <Router>
         <Routes>

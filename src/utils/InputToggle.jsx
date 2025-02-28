@@ -3,18 +3,30 @@ import { RxCross1 } from "react-icons/rx";
 import ChangeColour from './ChangeColour';
 import ChangeFontSize from './ChangeFontSize';
 import ChangeFontBold from './ChangeFontBold';
+import { useDispatch } from 'react-redux';
+import { updateField } from '../store/TemplateSlice';
+import { useSelector } from 'react-redux';
 
 
-const Toggle = ({ data, setData, className, element }) => {
+const Toggle = ({ className, element }) => {
+    const dispatch = useDispatch();
+
+    // template data from the state 
+    const data = useSelector((state) => state.template);
 
     const [showIn, setShowIn] = useState(true);
     const [showOptions, setShowOptions] = useState(false);
 
     const handleKeyDown = (e) => {
+
         if (e.key === 'Enter') {
             setShowIn(!showIn);
             setShowOptions(!showOptions);
         }
+    }
+
+    const handleUpdateField = (e) => {
+        dispatch(updateField({ field: element, updates: { text: e.target.value } }))
     }
 
     return (
@@ -25,15 +37,7 @@ const Toggle = ({ data, setData, className, element }) => {
                         className={`outline-purple-700/10 h-11 p-1 ${data[element]?.fontWeight} ${data[element]?.fontSize} ${className}`}
                         style={{ color: data[element]?.colour }}
                         value={data[element]?.text}
-                        onChange={(e) =>
-                            setData(prevData => ({
-                                ...prevData,
-                                [element]: {
-                                    ...prevData[element],
-                                    text: e.target.value
-                                }
-                            }))
-                        }
+                        onChange={handleUpdateField}
                         onKeyDown={handleKeyDown}
                         autoFocus
                     />
@@ -61,21 +65,21 @@ const Toggle = ({ data, setData, className, element }) => {
                 </div>
 
                 <div className='flex items-center justify-center w-full'>
-                    <ChangeColour setData={setData} data={data} element={element} />
+                    <ChangeColour element={element} />
                 </div>
 
                 <div className='w-full px-3 text-center'>
                     <h2 className='text-sm font-semibold my-2'>
                         Select Font Size
                     </h2>
-                    <ChangeFontSize setData={setData} element={element} />
+                    <ChangeFontSize element={element} />
                 </div>
 
                 <div className='text-center'>
                     <h2 className='text-sm font-semibold my-2'>
                         Change Font Boldness
                     </h2>
-                    <ChangeFontBold setData={setData} element={element} />
+                    <ChangeFontBold element={element} />
                 </div>
 
             </div>

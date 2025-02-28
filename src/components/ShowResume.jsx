@@ -15,8 +15,6 @@ const ShowResume = () => {
     const [option, setOption] = useState('Experience Level');
     const [showSelectOption, setShowSelectOption] = useState(false);
 
-    console.log(option)
-
     const options = [
         'All',
         'Professional',

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { HexColorPicker } from "react-colorful";
+import { useDispatch, useSelector } from 'react-redux';
+import { updateField } from '../store/TemplateSlice';
 
-const ChangeColour = ({ setData, element, data }) => {
+const ChangeColour = ({ element }) => {
+    const data = useSelector((state) => state.template);
+    const dispatch = useDispatch();
     const [color, setColor] = useState(data[element]?.colour);
     const [showPicker, setShowPicker] = useState(false);
 
@@ -11,10 +15,7 @@ const ChangeColour = ({ setData, element, data }) => {
         setShowPicker(false);
 
         // Update state only when the picker is closed (reduces unnecessary updates)
-        setData(prevData => ({
-            ...prevData,
-            [element]: { ...prevData[element], colour: color }
-        }));
+        dispatch(updateField({ field: element, updates: { colour: color } }))
     };
 
     return (
